@@ -28,3 +28,37 @@ const BetControls = ({ placeBet, selectedBetValue, updateBalance }) => {
     updateBalance(-Number(betAmount));
   };
 
+  return (
+    <div className="bet-controls">
+      <h2>Place Your Bet</h2>
+      <input
+        type="number"
+        value={betAmount}
+        onChange={handleBetAmountChange}
+        placeholder="Bet amount"
+      />
+      <select value={betType} onChange={handleBetTypeChange}>
+        <option value="number">Number</option>
+        <option value="color">Color</option>
+      </select>
+      {betType === 'number' ? (
+        <input
+          type="number"
+          value={betValue}
+          onChange={handleBetValueChange}
+          placeholder="Enter number (0-36)"
+        />
+      ) : (
+        <select value={betValue} onChange={handleBetValueChange}>
+          <option value="">Select color</option>
+          <option value="red">Red</option>
+          <option value="black">Black</option>
+          <option value="green">Green</option>
+        </select>
+      )}
+      <button onClick={handleBetSubmit}>Bet</button>
+    </div>
+  );
+};
+
+export default BetControls;
