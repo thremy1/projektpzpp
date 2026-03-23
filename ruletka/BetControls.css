@@ -1,1 +1,11 @@
 
+.bet-controls {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .bet-controls input,
+  .bet-controls select {
+    margin-right: 10px;
+  }
+
