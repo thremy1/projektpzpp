@@ -1,0 +1,35 @@
+.recent-results {
+  margin-top: 1rem;
+}
+
+.recent-results ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2rem;
+  min-height: 2rem;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.pill.red {
+  background: #d73a49;
+}
+
+.pill.black {
+  background: #24292f;
+}
+
+.pill.green {
+  background: #2da44e;
+}
