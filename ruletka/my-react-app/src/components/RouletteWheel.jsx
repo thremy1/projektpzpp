@@ -6,7 +6,13 @@ const RED_NUMBERS = new Set([
   1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36,
 ])
 
-const wheelData = Array.from({ length: 37 }, (_, value) => ({
+// European roulette order around the wheel.
+const ROULETTE_ORDER = [
+  0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5,
+  24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26,
+]
+
+const wheelData = ROULETTE_ORDER.map((value) => ({
   option: String(value),
   style: { backgroundColor: getColorForNumber(value), textColor: '#fff' },
 }))
@@ -22,7 +28,7 @@ function RouletteWheel({ spinning, onSpinEnd }) {
 
   useEffect(() => {
     if (!spinning || mustSpin) return
-    setPrizeNumber(Math.floor(Math.random() * 37))
+    setPrizeNumber(Math.floor(Math.random() * ROULETTE_ORDER.length))
     setMustSpin(true)
   }, [spinning, mustSpin])
 
@@ -37,7 +43,7 @@ function RouletteWheel({ spinning, onSpinEnd }) {
         fontSize={14}
         onStopSpinning={() => {
           setMustSpin(false)
-          onSpinEnd(prizeNumber)
+          onSpinEnd(ROULETTE_ORDER[prizeNumber])
         }}
       />
     </section>
