@@ -5,25 +5,25 @@
   margin: 0 auto;
   padding: 1rem;
   border-radius: 14px;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 12px 24px rgba(2, 6, 23, 0.4);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border-soft);
+  box-shadow: 0 12px 24px var(--shadow);
 }
 
 .control-row {
   display: grid;
   gap: 0.35rem;
   text-align: left;
-  color: #cbd5e1;
+  color: var(--app-muted);
 }
 
 .control-row input,
 .control-row select {
-  border: 1px solid #334155;
+  border: 1px solid var(--control-border);
   border-radius: 8px;
   padding: 0.5rem 0.6rem;
-  background: #0f172a;
-  color: #e2e8f0;
+  background: var(--control-bg);
+  color: var(--control-text);
 }
 
 .bet-controls button[disabled] {

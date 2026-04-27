@@ -5,13 +5,6 @@
 body {
   margin: 0;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  color: #e6edf3;
-  background:
-    radial-gradient(circle at 15% 15%, rgba(120, 119, 198, 0.22), transparent 35%),
-    radial-gradient(circle at 85% 12%, rgba(34, 211, 238, 0.15), transparent 32%),
-    radial-gradient(circle at 50% 100%, rgba(239, 68, 68, 0.12), transparent 38%),
-    linear-gradient(160deg, #05070f 0%, #0b1220 45%, #101827 100%);
-  background-attachment: fixed;
 }
 
 .app {
@@ -28,9 +21,9 @@ body {
   margin: 0 auto;
   padding: 0.55rem 0.7rem;
   border-radius: 14px;
-  border: 1px solid rgba(148, 163, 184, 0.24);
-  background: rgba(15, 23, 42, 0.72);
-  box-shadow: 0 14px 28px rgba(2, 8, 23, 0.45);
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+  box-shadow: 0 14px 28px var(--shadow);
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -64,11 +57,11 @@ body {
   font-size: 0.74rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--app-muted);
 }
 
 .wallet-value {
-  color: #bfdbfe;
+  color: var(--app-accent);
   font-size: 1.02rem;
 }
 
@@ -81,9 +74,9 @@ body {
   list-style: none;
   min-width: 190px;
   border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  background: rgba(15, 23, 42, 0.95);
-  box-shadow: 0 18px 34px rgba(2, 8, 23, 0.6);
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg-strong);
+  box-shadow: 0 18px 34px var(--shadow);
   z-index: 20;
   display: grid;
   gap: 0.3rem;
@@ -98,13 +91,13 @@ body {
   border-radius: 8px;
   border: 1px solid transparent;
   background: transparent;
-  color: #dbe7f5;
+  color: var(--app-text);
   transform: none;
 }
 
 .dropdown-item:hover {
-  background: rgba(51, 65, 85, 0.75);
-  border-color: rgba(148, 163, 184, 0.22);
+  background: color-mix(in srgb, var(--app-text) 10%, transparent);
+  border-color: var(--panel-border);
   transform: none;
 }
 
@@ -113,16 +106,16 @@ body {
   margin: 0 auto;
   padding: 1rem 1rem 1.1rem;
   border-radius: 14px;
-  border: 1px solid rgba(148, 163, 184, 0.24);
-  background: rgba(15, 23, 42, 0.78);
-  box-shadow: 0 16px 30px rgba(2, 8, 23, 0.45);
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+  box-shadow: 0 16px 30px var(--shadow);
   text-align: left;
 }
 
 .top-up-form-card h2 {
   margin: 0 0 0.8rem;
   font-size: 1.1rem;
-  color: #f1f5f9;
+  color: var(--app-heading);
 }
 
 .top-up-form {
@@ -136,17 +129,17 @@ body {
 }
 
 .form-row label {
-  color: #cbd5e1;
+  color: var(--app-muted);
   font-size: 0.88rem;
 }
 
 .form-row input,
 .form-row select {
-  border: 1px solid #334155;
+  border: 1px solid var(--control-border);
   border-radius: 8px;
   padding: 0.52rem 0.6rem;
-  background: #0f172a;
-  color: #e2e8f0;
+  background: var(--control-bg);
+  color: var(--control-text);
 }
 
 .form-actions {
@@ -161,16 +154,16 @@ body {
   margin: 0 auto;
   padding: 1rem 1rem 1.1rem;
   border-radius: 14px;
-  border: 1px solid rgba(148, 163, 184, 0.24);
-  background: rgba(15, 23, 42, 0.78);
-  box-shadow: 0 16px 30px rgba(2, 8, 23, 0.45);
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+  box-shadow: 0 16px 30px var(--shadow);
   text-align: left;
 }
 
 .account-card h2 {
   margin: 0 0 0.8rem;
   font-size: 1.12rem;
-  color: #f1f5f9;
+  color: var(--app-heading);
 }
 
 .account-grid {
@@ -182,14 +175,14 @@ body {
 .account-block {
   padding: 0.8rem;
   border-radius: 10px;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--panel-border-soft);
+  background: var(--panel-bg);
 }
 
 .account-block h3 {
   margin: 0 0 0.55rem;
   font-size: 0.95rem;
-  color: #dbeafe;
+  color: var(--app-accent);
 }
 
 .account-block p {
@@ -202,39 +195,89 @@ body {
 }
 
 .account-block span {
-  color: #94a3b8;
+  color: var(--app-muted);
   font-size: 0.84rem;
 }
 
 .account-block strong {
-  color: #e2e8f0;
+  color: var(--app-text);
   font-size: 0.88rem;
   text-align: right;
+}
+
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgba(2, 6, 23, 0.55);
+  backdrop-filter: blur(10px);
+}
+
+html[data-theme='light'] .auth-overlay {
+  background: rgba(15, 23, 42, 0.2);
+}
+
+.auth-card {
+  width: min(100%, 420px);
+  border-radius: 16px;
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg-strong);
+  box-shadow: 0 18px 55px var(--shadow);
+  padding: 1rem 1rem 1.1rem;
+  text-align: left;
+}
+
+.auth-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.auth-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--app-heading);
+}
+
+.auth-form {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.form-error {
+  margin: 0.2rem 0 0;
+  color: #ef4444;
+  font-weight: 600;
 }
 
 h1 {
   margin: 0;
   font-size: clamp(1.9rem, 4.6vw, 2.6rem);
   letter-spacing: 0.03em;
-  color: #f8fafc;
-  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  color: var(--app-heading);
+  text-shadow: 0 10px 28px var(--shadow);
 }
 
 button {
   justify-self: center;
-  border: 1px solid #334155;
+  border: 1px solid var(--control-border);
   border-radius: 10px;
   padding: 0.6rem 1.1rem;
-  background: linear-gradient(180deg, #1f2937, #111827);
-  color: #f8fafc;
+  background: var(--button-bg);
+  color: var(--button-text);
   font-weight: 600;
   cursor: pointer;
   transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
 }
 
 button:hover {
-  background: linear-gradient(180deg, #334155, #1e293b);
-  border-color: #475569;
+  background: var(--button-bg-hover);
+  border-color: var(--button-border-hover);
   transform: translateY(-1px);
 }
 
