@@ -25,6 +25,7 @@ export function getColorForNumber(number) {
 function RouletteWheel({ spinning, onSpinEnd }) {
   const [mustSpin, setMustSpin] = useState(false)
   const [prizeNumber, setPrizeNumber] = useState(0)
+  const [isLightTheme, setIsLightTheme] = useState(false)
 
   useEffect(() => {
     if (!spinning || mustSpin) return
@@ -32,14 +33,30 @@ function RouletteWheel({ spinning, onSpinEnd }) {
     setMustSpin(true)
   }, [spinning, mustSpin])
 
+  useEffect(() => {
+    const updateTheme = () => {
+      setIsLightTheme(document.documentElement.dataset.theme === 'light')
+    }
+
+    updateTheme()
+
+    const observer = new MutationObserver(updateTheme)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section className="roulette-wheel">
       <Wheel
         mustStartSpinning={mustSpin}
         prizeNumber={prizeNumber}
         data={wheelData}
-        outerBorderColor="#2f2f2f"
-        radiusLineColor="#666"
+        outerBorderColor={isLightTheme ? '#cbd5e1' : '#2f2f2f'}
+        radiusLineColor={isLightTheme ? '#94a3b8' : '#666'}
         fontSize={14}
         onStopSpinning={() => {
           setMustSpin(false)
