@@ -57,6 +57,11 @@ function App() {
   )
 
   const handleSpinStart = () => {
+    if (!currentUser) {
+      setLoginError('')
+      setIsLoginOpen(true)
+      return
+    }
     if (!canSpin) return
     setBalance((prev) => prev - betAmount)
     setIsSpinning(true)
@@ -336,10 +341,12 @@ function App() {
           )}
         </div>
 
-        <div className="wallet-badge" aria-live="polite">
-          <span className="wallet-label">Portfel</span>
-          <strong className="wallet-value">${balance}</strong>
-        </div>
+        {currentUser && (
+          <div className="wallet-badge" aria-live="polite">
+            <span className="wallet-label">Portfel</span>
+            <strong className="wallet-value">${balance}</strong>
+          </div>
+        )}
 
         <div className="settings-menu" ref={userMenuRef}>
           <button
@@ -827,6 +834,7 @@ function App() {
         betAmount={betAmount}
         setBetAmount={setBetAmount}
         canSpin={canSpin}
+        isLoggedIn={!!currentUser}
         onSpin={handleSpinStart}
       />
 

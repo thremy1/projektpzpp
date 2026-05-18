@@ -8,6 +8,7 @@ function BetControls({
   betAmount,
   setBetAmount,
   canSpin,
+  isLoggedIn,
   onSpin,
 }) {
   return (
@@ -50,7 +51,7 @@ function BetControls({
         </div>
       )}
 
-      <button type="button" onClick={onSpin} disabled={!canSpin}>
+      <button type="button" onClick={onSpin} disabled={isLoggedIn && !canSpin}>
         Zakrec ruletka
       </button>
     </section>
