@@ -249,6 +249,39 @@ html[data-theme='light'] .auth-overlay {
   gap: 0.7rem;
 }
 
+.auth-message {
+  margin: 0 0 0.85rem;
+  color: var(--app-muted);
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.auth-switch {
+  margin: 0.85rem 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--app-muted);
+}
+
+.auth-link {
+  justify-self: auto;
+  display: inline;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: var(--app-accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.auth-link:hover {
+  background: none;
+  color: var(--app-heading);
+}
+
 .form-error {
   margin: 0.2rem 0 0;
   color: #ef4444;

@@ -18,6 +18,7 @@ function App() {
   const [isRegisterPasswordOpen, setIsRegisterPasswordOpen] = useState(false)
   const [isAddFundsOpen, setIsAddFundsOpen] = useState(false)
   const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isLoginRequiredOpen, setIsLoginRequiredOpen] = useState(false)
   const [theme, setTheme] = useState(() => {
     const stored = localStorage.getItem('theme')
     return stored === 'light' || stored === 'dark' ? stored : 'dark'
@@ -120,6 +121,12 @@ function App() {
 
   const handleRegister = () => {
     setIsUserMenuOpen(false)
+    setIsRegisterOpen(true)
+  }
+
+  const handleOpenRegisterFromLogin = () => {
+    setIsLoginOpen(false)
+    setLoginError('')
     setIsRegisterOpen(true)
   }
 
@@ -253,6 +260,22 @@ function App() {
     setIsAddFundsOpen(false)
   }
 
+  const handleAccountSettings = () => {
+    setIsAddFundsOpen(false)
+    setIsSettingsOpen(false)
+    if (!currentUser) {
+      setIsLoginRequiredOpen(true)
+      return
+    }
+    setIsAccountOpen(true)
+  }
+
+  const handleLoginFromRequired = () => {
+    setIsLoginRequiredOpen(false)
+    setLoginError('')
+    setIsLoginOpen(true)
+  }
+
   return (
     <main className="app">
       <header className="top-nav">
@@ -294,11 +317,7 @@ function App() {
                   type="button"
                   className="dropdown-item"
                   role="menuitem"
-                  onClick={() => {
-                    setIsAccountOpen(true)
-                    setIsAddFundsOpen(false)
-                    setIsSettingsOpen(false)
-                  }}
+                  onClick={handleAccountSettings}
                 >
                   Ustawienia konta
                 </button>
@@ -383,6 +402,42 @@ function App() {
 
       <h1>Roulette Game</h1>
 
+      {isLoginRequiredOpen && (
+        <section className="auth-overlay" aria-label="Wymagane logowanie">
+          <div
+            className="auth-card"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Musisz się zalogować"
+          >
+            <header className="auth-header">
+              <h2>Musisz się zalogować</h2>
+              <button
+                type="button"
+                className="icon-button"
+                aria-label="Zamknij"
+                onClick={() => setIsLoginRequiredOpen(false)}
+              >
+                ✕
+              </button>
+            </header>
+
+            <p className="auth-message">
+              Aby zobaczyć ustawienia konta, najpierw zaloguj się na swoje konto.
+            </p>
+
+            <div className="form-actions">
+              <button type="button" onClick={() => setIsLoginRequiredOpen(false)}>
+                Anuluj
+              </button>
+              <button type="button" onClick={handleLoginFromRequired}>
+                Zaloguj się
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
+
       {isLoginOpen && (
         <section className="auth-overlay" aria-label="Logowanie">
           <div className="auth-card" role="dialog" aria-modal="true" aria-label="Panel logowania">
@@ -439,6 +494,13 @@ function App() {
                 <button type="submit">Zaloguj się</button>
               </div>
             </form>
+
+            <p className="auth-switch">
+              Nie masz konta?{' '}
+              <button type="button" className="auth-link" onClick={handleOpenRegisterFromLogin}>
+                Zarejestruj się
+              </button>
+            </p>
           </div>
         </section>
       )}
